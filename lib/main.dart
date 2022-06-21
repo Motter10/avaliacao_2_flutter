@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'HomePage.dart';
+import 'PatrimonioPage.dart';
 
 void main() {
   runApp(const MyApp());
@@ -44,12 +44,12 @@ class _LoginPageState extends State<LoginPage> {
               padding: EdgeInsets.only(top: 60.0),
               child: Center(
                 child: SizedBox(
-                    width: 200,
                     height: 150,
-                    /*decoration: BoxDecoration(
-                        color: Colors.red,
-                        borderRadius: BorderRadius.circular(50.0)),*/
-                    child: Text('')),
+                    child: Text('Login Patrimônio',
+                        style: TextStyle(
+                            fontSize: 30,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.blue))),
               ),
             ),
             Padding(
@@ -87,9 +87,10 @@ class _LoginPageState extends State<LoginPage> {
                 onPressed: () {
                   if (emailController.text == 'admin@patrimonio.com.br' &&
                       passwordController.text == '123') {
-                    Navigator.push(
+                    Navigator.pushReplacement(
                       context,
-                      MaterialPageRoute(builder: (context) => const HomePage()),
+                      MaterialPageRoute(
+                          builder: (context) => const PatrimonioPage()),
                     );
                   } else {
                     showDialog(
@@ -97,7 +98,8 @@ class _LoginPageState extends State<LoginPage> {
                       builder: (BuildContext context) {
                         return AlertDialog(
                           title: const Text('Erro'),
-                          content: const Text('Usuário ou senha inválidos'),
+                          content: const Text(
+                              'Dados de acesso inválidos. Verifique!'),
                           actions: <Widget>[
                             ElevatedButton(
                               child: const Text('OK'),
@@ -111,7 +113,7 @@ class _LoginPageState extends State<LoginPage> {
                     );
                   }
                   // Navigator.push(context,
-                  //     MaterialPageRoute(builder: (_) => const HomePage()));
+                  //     MaterialPageRoute(builder: (_) => const PatrimonioPage()));
                 },
                 child: const Text(
                   'Login',
@@ -119,10 +121,6 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
             ),
-            const SizedBox(
-              height: 130,
-            ),
-            const Text('New User? Create Account')
           ],
         ),
       ),
