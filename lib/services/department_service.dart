@@ -16,6 +16,12 @@ class DepartmentService extends ChangeNotifier {
   }
 
   void update(Department department) {
+    departments[departments.indexOf(department)] = department;
+    notifyListeners();
+  }
+
+  void removeAt(int index) {
+    departments.removeAt(index);
     notifyListeners();
   }
 }

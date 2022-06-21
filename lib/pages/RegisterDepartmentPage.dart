@@ -4,12 +4,21 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class RegisterDepartmentPage extends StatelessWidget {
-  RegisterDepartmentPage({Key? key}) : super(key: key);
+  final Department? department;
+
+  RegisterDepartmentPage({
+    Key? key,
+    this.department,
+  }) : super(key: key);
 
   TextEditingController controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+    if (department != null) {
+      controller.text = department?.name as String;
+    }
+
     return Scaffold(
         appBar: AppBar(
           title: const Text('Departamentos'),
@@ -18,10 +27,38 @@ class RegisterDepartmentPage extends StatelessWidget {
               icon: const Icon(Icons.check_circle_outline,
                   color: Colors.white, size: 30),
               onPressed: () {
-                Provider.of<DepartmentService>(context, listen: false)
-                    .add(Department(
-                  name: controller.text,
-                ));
+                //se o departamento existir, é para ATUALIZAR
+                if (department != null) {
+                  department?.name = controller.text;
+                  Provider.of<DepartmentService>(context, listen: false)
+                      .update(department!);
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text('Departamento atualizado com sucesso!'),
+                      backgroundColor: Colors.green,
+                      duration: Duration(
+                        seconds: 3,
+                      ),
+                    ),
+                  );
+                  Navigator.pop(context);
+                }
+                //se o departamento NÃO existir, é pra CRIAR
+                else {
+                  Provider.of<DepartmentService>(context, listen: false)
+                      .add(Department(
+                    name: controller.text,
+                  ));
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text('Departamento cadastrado com sucesso!'),
+                      backgroundColor: Colors.green,
+                      duration: Duration(
+                        seconds: 3,
+                      ),
+                    ),
+                  );
+                }
               },
             ),
             IconButton(
