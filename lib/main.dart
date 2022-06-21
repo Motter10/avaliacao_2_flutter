@@ -1,9 +1,20 @@
+import 'package:avaliacao_2/services/category_service.dart';
+import 'package:avaliacao_2/services/department_service.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-import 'PatrimonioPage.dart';
+import 'pages/Dashboard.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MultiProvider(
+    providers: [
+      ChangeNotifierProvider(
+        create: (_) => DepartmentService(),
+      ),
+      ChangeNotifierProvider(create: (_) => CategoryService())
+    ],
+    child: const MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -90,7 +101,7 @@ class _LoginPageState extends State<LoginPage> {
                     Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const PatrimonioPage()),
+                          builder: (context) => const DashboardPage()),
                     );
                   } else {
                     showDialog(

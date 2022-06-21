@@ -1,15 +1,17 @@
+import 'package:avaliacao_2/pages/DepartmentsPage.dart';
+import 'package:avaliacao_2/services/department_service.dart';
 import 'package:flutter/material.dart';
 
-import 'components/MyCard.dart';
+import '../components/MyCard.dart';
 
-class PatrimonioPage extends StatefulWidget {
-  const PatrimonioPage({Key? key}) : super(key: key);
+class DashboardPage extends StatefulWidget {
+  const DashboardPage({Key? key}) : super(key: key);
 
   @override
-  _PatrimonioPageState createState() => _PatrimonioPageState();
+  _DashboardPageState createState() => _DashboardPageState();
 }
 
-class _PatrimonioPageState extends State<PatrimonioPage> {
+class _DashboardPageState extends State<DashboardPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,18 +37,30 @@ class _PatrimonioPageState extends State<PatrimonioPage> {
               ),
               MyCard(
                 title: 'Departamentos',
-                quantity: 10,
+                quantity: DepartmentService().departments.length,
                 color: Colors.blue,
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const DepartmentsPage()));
+                },
               ),
               MyCard(
                 title: 'Categorias',
                 quantity: 5,
                 color: Colors.green,
+                onTap: () {
+                  Navigator.pushNamed(context, '/categories');
+                },
               ),
               MyCard(
                 title: 'Patrimônios',
                 quantity: 50,
                 color: Colors.orange,
+                onTap: () {
+                  Navigator.pushNamed(context, '/patrimonies');
+                },
               ),
             ]),
           ),
