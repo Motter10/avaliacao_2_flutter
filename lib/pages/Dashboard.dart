@@ -1,6 +1,9 @@
+import 'package:avaliacao_2/pages/CategoriesPage.dart';
 import 'package:avaliacao_2/pages/DepartmentsPage.dart';
+import 'package:avaliacao_2/services/category_service.dart';
 import 'package:avaliacao_2/services/department_service.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../components/MyCard.dart';
 
@@ -37,7 +40,7 @@ class _DashboardPageState extends State<DashboardPage> {
               ),
               MyCard(
                 title: 'Departamentos',
-                quantity: DepartmentService().departments.length,
+                quantity: context.watch<DepartmentService>().departments.length,
                 color: Colors.blue,
                 onTap: () {
                   Navigator.push(
@@ -48,10 +51,13 @@ class _DashboardPageState extends State<DashboardPage> {
               ),
               MyCard(
                 title: 'Categorias',
-                quantity: 5,
+                quantity: context.watch<CategoryService>().categories.length,
                 color: Colors.green,
                 onTap: () {
-                  Navigator.pushNamed(context, '/categories');
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const CategoriesPage()));
                 },
               ),
               MyCard(
