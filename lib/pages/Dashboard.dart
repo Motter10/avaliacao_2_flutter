@@ -1,7 +1,9 @@
 import 'package:avaliacao_2/pages/CategoriesPage.dart';
 import 'package:avaliacao_2/pages/DepartmentsPage.dart';
+import 'package:avaliacao_2/pages/PatrimoniesPage.dart';
 import 'package:avaliacao_2/services/category_service.dart';
 import 'package:avaliacao_2/services/department_service.dart';
+import 'package:avaliacao_2/services/patrimony_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -62,10 +64,13 @@ class _DashboardPageState extends State<DashboardPage> {
               ),
               MyCard(
                 title: 'Patrimônios',
-                quantity: 50,
+                quantity: context.watch<PatrimonyService>().patrimonies.length,
                 color: Colors.orange,
                 onTap: () {
-                  Navigator.pushNamed(context, '/patrimonies');
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const PatrimoniesPage()));
                 },
               ),
             ]),

@@ -1,5 +1,6 @@
 import 'package:avaliacao_2/services/category_service.dart';
 import 'package:avaliacao_2/services/department_service.dart';
+import 'package:avaliacao_2/services/patrimony_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -8,10 +9,9 @@ import 'pages/Dashboard.dart';
 void main() {
   runApp(MultiProvider(
     providers: [
-      ChangeNotifierProvider(
-        create: (_) => DepartmentService(),
-      ),
-      ChangeNotifierProvider(create: (_) => CategoryService())
+      ChangeNotifierProvider(create: (_) => DepartmentService()),
+      ChangeNotifierProvider(create: (_) => CategoryService()),
+      ChangeNotifierProvider(create: (_) => PatrimonyService())
     ],
     child: const MyApp(),
   ));
